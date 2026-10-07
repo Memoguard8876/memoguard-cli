@@ -24,4 +24,4 @@ Use exactly one of `--xdr`, `--memo`, `--simulation`, or `--json`. `--xdr -` rea
 
 This tool scans supported decoded fields; it cannot prove that arbitrary contracts or opaque bytes contain no private data. Run it before submitting a transaction. Go 1.26 and access to tagged private `memoguard-rules` and `memoguard-engine` modules are required to build from source.
 
-Product PRD and architecture live in the parent `memguard/docs` folder in the local workspace.
+The shared [product requirements](product/docs/PRD.md), architecture, validation record, and vector brand files are versioned in `product/`. The parent `memguard` folder also keeps a local workspace copy.
