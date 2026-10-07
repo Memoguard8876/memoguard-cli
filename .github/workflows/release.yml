@@ -27,6 +27,7 @@ jobs:
         with:
           go-version-file: memoguard-cli/go.mod
       - run: go work init ./memoguard-rules ./memoguard-engine ./memoguard-cli
+      - run: go work edit -replace=github.com/memoguard8876/memoguard-rules=./memoguard-rules -replace=github.com/memoguard8876/memoguard-engine=./memoguard-engine
       - name: Build binaries
         working-directory: memoguard-cli
         run: |
