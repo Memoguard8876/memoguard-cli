@@ -1,0 +1,29 @@
+name: Go
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: memoguard-cli
+      - uses: actions/checkout@v4
+        with:
+          repository: Memoguard8876/memoguard-rules
+          ref: v0.1.0
+          path: memoguard-rules
+          token: ${{ secrets.MODULES_READ_TOKEN }}
+      - uses: actions/checkout@v4
+        with:
+          repository: Memoguard8876/memoguard-engine
+          ref: v0.1.0
+          path: memoguard-engine
+          token: ${{ secrets.MODULES_READ_TOKEN }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: memoguard-cli/go.mod
+      - run: go work init ./memoguard-rules ./memoguard-engine ./memoguard-cli
+      - run: go test ./memoguard-cli/...
+      - run: go vet ./memoguard-cli/...
