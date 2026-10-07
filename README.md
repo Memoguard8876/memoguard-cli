@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.svg" alt="MemoGuard logo" width="112"></p>
+
 # memoguard-cli
 
 Command-line interface for running MemoGuard locally and in CI. The implementation language is Go.

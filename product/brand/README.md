@@ -2,6 +2,8 @@
 
 `memoguard.svg` is the master vector asset. Its graphite enclosure and open channel represent controlled disclosure; the blue point represents data kept inside the safe boundary. It is built from SVG paths and circles only, with no embedded bitmap.
 
+`memoguard-avatar.png` is a transparent 512 px export of the master SVG for GitHub's organization avatar upload.
+
 - Keep clear space of at least one blue-dot diameter around the mark.
 - Use the mark on white or very light surfaces; use `memoguard-monochrome.svg` for one-color applications.
 - Do not add shadows, gradients, borders, or text inside the mark.
