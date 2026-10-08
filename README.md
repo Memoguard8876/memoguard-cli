@@ -20,10 +20,13 @@ Rule definitions, XDR parsing, or GitHub Action annotations.
 memoguard scan --xdr transaction.xdr
 memoguard scan --xdr - --format json < transaction.xdr
 memoguard scan --simulation simulation.json --policy policy.json
+memoguard scan --xdr transaction.xdr --format sarif --fail-on warning
 ```
 
-Use exactly one of `--xdr`, `--memo`, `--simulation`, or `--json`. `--xdr -` reads standard input. The report contains rule names and field paths, never matched values or the original payload. Exit code `0` means no blocking finding, `1` means blocked, `2` means invalid input or policy, and `3` means an operational failure. Warnings alone do not block. For sensitive memos, scan transaction XDR from a file or stdin; a `--memo` shell argument may be retained in history.
+Use exactly one of `--xdr`, `--memo`, `--simulation`, or `--json`. `--xdr -` reads standard input. Output formats are `human`, `json`, and SARIF 2.1.0; reports contain rule names and field paths, never matched values or the original payload. Exit code `0` means no finding at or above the chosen failure threshold, `1` means the threshold was met, `2` means invalid input or policy, and `3` means an operational failure. `--fail-on` accepts `block` (default), `warning`, or `none`. For sensitive memos, scan transaction XDR from a file or stdin; a `--memo` shell argument may be retained in history.
 
 This tool scans supported decoded fields; it cannot prove that arbitrary contracts or opaque bytes contain no private data. Run it before submitting a transaction. Go 1.26 and the tagged `memoguard-rules` and `memoguard-engine` modules are required to build from source.
 
 The shared [product requirements](product/docs/PRD.md), architecture, validation record, and vector brand files are versioned in `product/`. The parent `memguard` folder also keeps a local workspace copy.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for changes, [SECURITY.md](SECURITY.md) for private vulnerability reports, and [LICENSE](LICENSE) for MIT terms.

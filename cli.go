@@ -23,7 +23,7 @@ const (
 
 func Run(ctx context.Context, args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 	if len(args) == 0 || args[0] != "scan" {
-		fmt.Fprintln(stderr, "usage: memoguard scan [--xdr file | --memo text | --simulation file | --json file] [--policy file] [--format human|json]")
+		fmt.Fprintln(stderr, "usage: memoguard scan [--xdr file | --memo text | --simulation file | --json file] [--policy file] [--format human|json|sarif] [--fail-on block|warning|none]")
 		return ExitInput
 	}
 	flags := flag.NewFlagSet("scan", flag.ContinueOnError)
@@ -33,7 +33,8 @@ func Run(ctx context.Context, args []string, stdin io.Reader, stdout, stderr io.
 	simulationPath := flags.String("simulation", "", "Stellar RPC simulateTransaction JSON file")
 	jsonPath := flags.String("json", "", "decoded public-transaction JSON file")
 	policyPath := flags.String("policy", "", "policy JSON file")
-	format := flags.String("format", "human", "human or json")
+	format := flags.String("format", "human", "human, json, or sarif")
+	failOn := flags.String("fail-on", "block", "block, warning, or none")
 	if err := flags.Parse(args[1:]); err != nil || flags.NArg() != 0 {
 		return ExitInput
 	}
@@ -43,8 +44,8 @@ func Run(ctx context.Context, args []string, stdin io.Reader, stdout, stderr io.
 			provided++
 		}
 	}
-	if provided != 1 || (*format != "human" && *format != "json") {
-		fmt.Fprintln(stderr, "choose exactly one input and --format human or json")
+	if provided != 1 || (*format != "human" && *format != "json" && *format != "sarif") || (*failOn != "block" && *failOn != "warning" && *failOn != "none") {
+		fmt.Fprintln(stderr, "choose exactly one input, --format human|json|sarif, and --fail-on block|warning|none")
 		return ExitInput
 	}
 	policy := rules.Default()
@@ -85,14 +86,28 @@ func Run(ctx context.Context, args []string, stdin io.Reader, stdout, stderr io.
 			fmt.Fprintln(stderr, "cannot write report")
 			return ExitFailure
 		}
+	} else if *format == "sarif" {
+		if err := writeSARIF(stdout, report); err != nil {
+			fmt.Fprintln(stderr, "cannot write report")
+			return ExitFailure
+		}
 	} else if err := writeHuman(stdout, report); err != nil {
 		fmt.Fprintln(stderr, "cannot write report")
 		return ExitFailure
 	}
-	if report.Blocked() {
+	if shouldFail(report, *failOn) {
 		return ExitBlocked
 	}
 	return ExitClean
+}
+
+func shouldFail(report engine.Report, threshold string) bool {
+	for _, finding := range report.Findings {
+		if finding.Severity == rules.Block || (threshold == "warning" && finding.Severity == rules.Warning) {
+			return threshold != "none"
+		}
+	}
+	return false
 }
 
 func readInput(xdrPath, memo, simulationPath, jsonPath string, stdin io.Reader) (engine.Input, error) {

@@ -3,8 +3,8 @@ module github.com/memoguard8876/memoguard-cli
 go 1.26.3
 
 require (
-	github.com/memoguard8876/memoguard-engine v0.1.0
-	github.com/memoguard8876/memoguard-rules v0.1.0
+	github.com/memoguard8876/memoguard-engine v0.2.0
+	github.com/memoguard8876/memoguard-rules v0.1.1
 )
 
 require (
