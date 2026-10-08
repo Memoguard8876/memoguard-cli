@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.1 — 2026-10-08
+
+- Upgrade the engine so supported input beyond scan limits fails explicitly rather than passing as clean.
+- Scan numeric values in decoded JSON with configured policy rules.
+
 ## v0.2.0 — 2026-10-08
 
 - Add redacted SARIF output and configurable `--fail-on` threshold.

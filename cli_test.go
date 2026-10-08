@@ -60,3 +60,12 @@ func TestFailureThresholdAndSARIFRedaction(t *testing.T) {
 		})
 	}
 }
+
+func TestIncompleteScanIsInputError(t *testing.T) {
+	input := `{"value":"` + strings.Repeat("a", 65<<10) + `"}`
+	var output, errors bytes.Buffer
+	code := Run(context.Background(), []string{"scan", "--json", "-", "--format", "json"}, strings.NewReader(input), &output, &errors)
+	if code != ExitInput || output.Len() != 0 || !strings.Contains(errors.String(), "scan depth, field, or text limit") {
+		t.Fatalf("exit=%d output=%q stderr=%q", code, output.String(), errors.String())
+	}
+}
