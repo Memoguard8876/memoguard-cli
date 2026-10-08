@@ -24,6 +24,6 @@ memoguard scan --simulation simulation.json --policy policy.json
 
 Use exactly one of `--xdr`, `--memo`, `--simulation`, or `--json`. `--xdr -` reads standard input. The report contains rule names and field paths, never matched values or the original payload. Exit code `0` means no blocking finding, `1` means blocked, `2` means invalid input or policy, and `3` means an operational failure. Warnings alone do not block. For sensitive memos, scan transaction XDR from a file or stdin; a `--memo` shell argument may be retained in history.
 
-This tool scans supported decoded fields; it cannot prove that arbitrary contracts or opaque bytes contain no private data. Run it before submitting a transaction. Go 1.26 and access to tagged private `memoguard-rules` and `memoguard-engine` modules are required to build from source.
+This tool scans supported decoded fields; it cannot prove that arbitrary contracts or opaque bytes contain no private data. Run it before submitting a transaction. Go 1.26 and the tagged `memoguard-rules` and `memoguard-engine` modules are required to build from source.
 
 The shared [product requirements](product/docs/PRD.md), architecture, validation record, and vector brand files are versioned in `product/`. The parent `memguard` folder also keeps a local workspace copy.

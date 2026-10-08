@@ -14,13 +14,13 @@ jobs:
           repository: Memoguard8876/memoguard-rules
           ref: v0.1.0
           path: memoguard-rules
-          token: ${{ secrets.MODULES_READ_TOKEN }}
+          token: ${{ secrets.MODULES_READ_TOKEN || github.token }}
       - uses: actions/checkout@v4
         with:
           repository: Memoguard8876/memoguard-engine
           ref: v0.1.0
           path: memoguard-engine
-          token: ${{ secrets.MODULES_READ_TOKEN }}
+          token: ${{ secrets.MODULES_READ_TOKEN || github.token }}
       - uses: actions/setup-go@v5
         with:
           go-version-file: memoguard-cli/go.mod
