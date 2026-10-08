@@ -25,4 +25,4 @@ MemoGuard handles data that may already be sensitive. The scanner must minimize 
 
 ## Reporting a vulnerability
 
-Do not put exploit details or live sensitive data in a public issue. Use the repository's private vulnerability-reporting feature once it is enabled.
+Do not put exploit details or live sensitive data in a public issue. Private vulnerability reporting is enabled on all four public repositories; use that channel.

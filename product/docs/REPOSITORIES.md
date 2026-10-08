@@ -17,10 +17,10 @@ The arrows show use of a released artifact or Go package. The repositories have 
 
 ## Release order
 
-1. Tag `memoguard-rules` v0.1.0.
-2. Pin that tag in `memoguard-engine`, test, then tag v0.1.0.
-3. Pin the engine tag in `memoguard-cli`, publish binaries, then tag v0.1.0.
-4. Pin a CLI release and checksum in `memoguard-action`, then tag v0.1.0.
+1. Tag a validated `memoguard-rules` release.
+2. Pin that tag in `memoguard-engine`, test, then tag the engine.
+3. Pin the engine tag in `memoguard-cli`; CI and the release job test the exact `go.mod` versions before publishing binaries.
+4. Pin one CLI release and every platform digest in `memoguard-action`, run its three-OS integration workflow, then tag the Action.
 
 Use a parent `go.work` file for local development only. Published `go.mod` files must resolve released versions without the parent workspace.
 

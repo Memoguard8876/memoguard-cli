@@ -16,6 +16,12 @@ Rule definitions, XDR parsing, or GitHub Action annotations.
 
 ## Run
 
+Install with Go 1.26 or download a binary and `SHA256SUMS` from the [v0.2.2 release](https://github.com/Memoguard8876/memoguard-cli/releases/tag/v0.2.2):
+
+```bash
+go install github.com/memoguard8876/memoguard-cli/cmd/memoguard@v0.2.2
+```
+
 ```bash
 memoguard scan --xdr transaction.xdr
 memoguard scan --xdr - --format json < transaction.xdr
@@ -28,5 +34,7 @@ Use exactly one of `--xdr`, `--memo`, `--simulation`, or `--json`. `--xdr -` rea
 This tool scans supported decoded fields; it cannot prove that arbitrary contracts or opaque bytes contain no private data. Inputs beyond supported scan limits return exit code `2` rather than a clean result. Run it before submitting a transaction. Go 1.26 and the tagged `memoguard-rules` and `memoguard-engine` modules are required to build from source.
 
 The shared [product requirements](product/docs/PRD.md), architecture, validation record, and vector brand files are versioned in `product/`. The parent `memguard` folder also keeps a local workspace copy.
+
+[Wave application steps and six contributor issues](product/docs/WAVE.md) are documented separately.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for changes, [SECURITY.md](SECURITY.md) for private vulnerability reports, and [LICENSE](LICENSE) for MIT terms.

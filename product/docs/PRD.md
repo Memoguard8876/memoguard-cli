@@ -38,7 +38,7 @@ MemoGuard gives developers a clear pass or fail **before submission**. It points
 - Return finding ID, severity, field path, safe description, and suggested fix.
 - Never include matched raw private values in normal reports, CI annotations, or telemetry.
 - Exit with a nonzero code when a blocking finding is present.
-- Support JSON and human-readable output; SARIF can follow once the core path is stable.
+- Support JSON, human-readable, and redacted SARIF output.
 - Provide a reusable Go API and a GitHub Action that invokes the released CLI.
 
 ### Initial policy categories

@@ -1,12 +1,12 @@
 # MemoGuard interface contract
 
-This is the first implementation target. Package names and flag spelling may evolve before v0.1.0, but the behavior should stay consistent.
+This describes the released v0.2 interface. The Go packages remain the source of truth for exact types.
 
 ## Go engine
 
 ```go
 type Input struct {
-    Kind    string // envelope_xdr, memo_text, or soroban_simulation
+    Kind    Kind // envelope_xdr, memo_text, soroban_simulation, or decoded_json
     Payload []byte
 }
 
@@ -33,9 +33,10 @@ Matched raw content is deliberately absent from `Finding`. The engine must be de
 memoguard scan --xdr transaction.xdr --format json
 memoguard scan --memo "invoice 123" --format human
 memoguard scan --simulation simulation.json --policy policy.json
+memoguard scan --xdr transaction.xdr --format sarif --fail-on warning
 ```
 
-Planned exit codes: `0` clean, `1` blocking finding, `2` invalid input or policy, `3` internal error. Warnings do not fail by default; a strict mode may opt in later.
+Exit codes: `0` no finding at the selected threshold, `1` threshold met, `2` invalid or incomplete input or policy, `3` operational error. Warnings do not fail by default; `--fail-on warning` opts in, and `--fail-on none` emits findings without failing.
 
 ## JSON report example
 
@@ -57,4 +58,4 @@ Planned exit codes: `0` clean, `1` blocking finding, `2` invalid input or policy
 
 ## GitHub Action
 
-The Action receives an input path, policy path, and CLI version. It downloads the matching CLI release, verifies its checksum, runs the scan, and emits annotations from the JSON report. It must not include input values in annotations.
+The Action receives an input path, kind, optional policy, and failure threshold. Its release pins one CLI version and its platform SHA-256 digests. It downloads the public binary, verifies the digest, runs the scan, and emits annotations from the JSON report. It does not include input values in annotations.
