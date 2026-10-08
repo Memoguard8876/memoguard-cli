@@ -7,24 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: memoguard-cli
-      - uses: actions/checkout@v4
-        with:
-          repository: Memoguard8876/memoguard-rules
-          ref: v0.1.0
-          path: memoguard-rules
-          token: ${{ secrets.MODULES_READ_TOKEN || github.token }}
-      - uses: actions/checkout@v4
-        with:
-          repository: Memoguard8876/memoguard-engine
-          ref: v0.1.0
-          path: memoguard-engine
-          token: ${{ secrets.MODULES_READ_TOKEN || github.token }}
       - uses: actions/setup-go@v5
         with:
-          go-version-file: memoguard-cli/go.mod
-      - run: go work init ./memoguard-cli
-      - run: go work edit -replace=github.com/memoguard8876/memoguard-rules=./memoguard-rules -replace=github.com/memoguard8876/memoguard-engine=./memoguard-engine
-      - run: go test ./memoguard-cli/...
-      - run: go vet ./memoguard-cli/...
+          go-version-file: go.mod
+      - run: go test ./...
+      - run: go vet ./...

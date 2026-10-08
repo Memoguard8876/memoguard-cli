@@ -9,25 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: memoguard-cli
-      - uses: actions/checkout@v4
-        with:
-          repository: Memoguard8876/memoguard-rules
-          ref: v0.1.1
-          path: memoguard-rules
-      - uses: actions/checkout@v4
-        with:
-          repository: Memoguard8876/memoguard-engine
-          ref: v0.2.1
-          path: memoguard-engine
       - uses: actions/setup-go@v5
         with:
-          go-version-file: memoguard-cli/go.mod
-      - run: go work init ./memoguard-cli
-      - run: go work edit -replace=github.com/memoguard8876/memoguard-rules=./memoguard-rules -replace=github.com/memoguard8876/memoguard-engine=./memoguard-engine
+          go-version-file: go.mod
+      - name: Verify source
+        run: |
+          go test ./...
+          go vet ./...
       - name: Build binaries
-        working-directory: memoguard-cli
         run: |
           mkdir -p dist
           for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64; do
@@ -40,4 +29,4 @@ jobs:
           (cd dist && sha256sum memoguard-* > SHA256SUMS)
       - uses: softprops/action-gh-release@v2
         with:
-          files: memoguard-cli/dist/*
+          files: dist/*

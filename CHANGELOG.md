@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.2 — 2026-10-08
+
+- Make CI and release builds use the exact public module versions pinned in `go.mod`.
+- Run tests and vet within the release job before publishing binaries.
+
 ## v0.2.1 — 2026-10-08
 
 - Upgrade the engine so supported input beyond scan limits fails explicitly rather than passing as clean.
