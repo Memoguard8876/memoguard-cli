@@ -25,7 +25,7 @@ Six scoped issues are open: policy [overlays](https://github.com/Memoguard8876/m
 
 | Item | Current evidence | Status |
 | --- | --- | --- |
-| Source and docs | Four public repositories, MIT licenses, READMEs, CI, and [product docs](README.md) | Available |
+| Source and docs | Four public repositories, MIT licenses, READMEs, CI, [product docs](README.md), and releases for [rules](https://github.com/Memoguard8876/memoguard-rules/releases/tag/v0.1.1), [engine](https://github.com/Memoguard8876/memoguard-engine/releases/tag/v0.2.1), [CLI](https://github.com/Memoguard8876/memoguard-cli/releases/tag/v0.2.2), and [Action](https://github.com/Memoguard8876/memoguard-action/releases/tag/v0.2.1) | Available |
 | Downloadable CLI | [v0.2.2 release](https://github.com/Memoguard8876/memoguard-cli/releases/tag/v0.2.2) with binaries and checksums | Available |
 | Reusable Action | [memoguard-action](https://github.com/Memoguard8876/memoguard-action), pinned to CLI v0.2.2 | Available |
 | Demo video | No screen recording of unsafe fixture, redacted finding, corrected fixture, and Action check | Missing |
