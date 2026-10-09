@@ -43,4 +43,6 @@ The [documentation index](product/docs/README.md), [demo outline](product/docs/D
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for changes, [SECURITY.md](SECURITY.md) for private vulnerability reports, and [LICENSE](LICENSE) for MIT terms.
 
+Documentation: [MemoGuard Docs](https://cjay-1.gitbook.io/memoguard-docs/)
+
 Maintainers: [Memoguard8876](https://github.com/Memoguard8876). Discuss public work in [issues](https://github.com/Memoguard8876/memoguard-cli/issues); report vulnerabilities privately through SECURITY.md.
