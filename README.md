@@ -2,6 +2,8 @@
 
 # memoguard-cli
 
+[![Go CI](https://github.com/Memoguard8876/memoguard-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/Memoguard8876/memoguard-cli/actions/workflows/ci.yml)
+
 Command-line interface for running MemoGuard locally and in CI. The implementation language is Go.
 
 ## Owns
@@ -33,8 +35,12 @@ Use exactly one of `--xdr`, `--memo`, `--simulation`, or `--json`. `--xdr -` rea
 
 This tool scans supported decoded fields; it cannot prove that arbitrary contracts or opaque bytes contain no private data. Inputs beyond supported scan limits return exit code `2` rather than a clean result. Run it before submitting a transaction. Go 1.26 and the tagged `memoguard-rules` and `memoguard-engine` modules are required to build from source.
 
-The shared [product requirements](product/docs/PRD.md), architecture, validation record, and vector brand files are versioned in `product/`. The parent `memguard` folder also keeps a local workspace copy.
+The shared [product requirements](product/docs/PRD.md), [architecture](product/docs/ARCHITECTURE.md), [validation record](product/docs/VALIDATION.md), and vector brand files are versioned in `product/`. The parent `memguard` folder also keeps a local workspace copy.
+
+The [documentation index](product/docs/README.md), [demo outline](product/docs/DEMO.md), [Wave readiness record](product/docs/WAVE_READINESS.md), and [submission packet](product/docs/SUBMISSION.md) separate validated behavior from remaining pilot and program work.
 
 [Wave application steps and six contributor issues](product/docs/WAVE.md) are documented separately.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for changes, [SECURITY.md](SECURITY.md) for private vulnerability reports, and [LICENSE](LICENSE) for MIT terms.
+
+Maintainers: [Memoguard8876](https://github.com/Memoguard8876). Discuss public work in [issues](https://github.com/Memoguard8876/memoguard-cli/issues); report vulnerabilities privately through SECURITY.md.
