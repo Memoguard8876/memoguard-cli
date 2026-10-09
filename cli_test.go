@@ -69,3 +69,16 @@ func TestIncompleteScanIsInputError(t *testing.T) {
 		t.Fatalf("exit=%d output=%q stderr=%q", code, output.String(), errors.String())
 	}
 }
+
+func TestUnrecognizedSimulationIsInputError(t *testing.T) {
+	for _, input := range []string{
+		`{"memo":"person@example.com"}`,
+		`{"jsonrpc":"2.0","id":1,"error":{"code":-32602,"message":"invalid"}}`,
+	} {
+		var output, errors bytes.Buffer
+		code := Run(context.Background(), []string{"scan", "--simulation", "-"}, strings.NewReader(input), &output, &errors)
+		if code != ExitInput || strings.Contains(output.String(), "clean") || strings.Contains(errors.String(), "person@example.com") {
+			t.Fatalf("exit=%d stdout=%q stderr=%q", code, output.String(), errors.String())
+		}
+	}
+}

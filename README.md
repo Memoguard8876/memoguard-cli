@@ -40,10 +40,10 @@
 ## Install
 
 ```bash
-go install github.com/memoguard8876/memoguard-cli/cmd/memoguard@v0.2.2
+go install github.com/memoguard8876/memoguard-cli/cmd/memoguard@v0.2.3
 ```
 
-Or download a binary from the [v0.2.2 release](https://github.com/Memoguard8876/memoguard-cli/releases/tag/v0.2.2) and check it:
+Or download a binary from the [v0.2.3 release](https://github.com/Memoguard8876/memoguard-cli/releases/tag/v0.2.3) and check it:
 
 ```bash
 sha256sum --check --ignore-missing SHA256SUMS
@@ -84,7 +84,7 @@ Use exactly one of `--xdr`, `--memo`, `--simulation` or `--json`.
 | Flag | Default | Meaning |
 | --- | --- | --- |
 | `--xdr <file>` | | Base64 envelope XDR. `-` reads stdin |
-| `--simulation <file>` | | The `result` object of a `simulateTransaction` reply |
+| `--simulation <file>` | | A `simulateTransaction` reply: the full JSON-RPC reply or just its `result`. Unrecognized input exits 2 |
 | `--json <file>` | | Decoded transaction JSON |
 | `--memo <text>` | | Memo text. It may stay in shell history, so use a file for real data |
 | `--policy <file>` | built-in | JSON policy. **Replaces** the built-in rules |
@@ -126,8 +126,6 @@ Needs Go 1.26.3 or newer. The `memoguard-rules` and `memoguard-engine` modules a
 
 The tool scans supported decoded fields only. It cannot prove that arbitrary contracts or opaque bytes hold no private data. Run it before you submit a transaction. Over-limit input returns exit code `2`, never a clean result. See [What is scanned](https://cjay-1.gitbook.io/memoguard-docs/core-concepts/what-is-scanned) and [Limitations](https://cjay-1.gitbook.io/memoguard-docs/limitations).
 
-> **Known gap:** `--simulation` expects the `result` object. The full JSON-RPC reply is read as having no events and reports clean. Use `jq '.result'` first.
-
 Product requirements, architecture, validation record, demo outline and submission notes are versioned in [`product/docs`](product/docs/README.md).
 
 ## The MemoGuard family
@@ -142,7 +140,7 @@ memoguard-rules ──► memoguard-engine ──► memoguard-cli ──► mem
 | --- | --- | --- |
 | [memoguard-rules](https://github.com/Memoguard8876/memoguard-rules) | Policy schema, validation, built-in rules, expiring exceptions | v0.1.1 |
 | [memoguard-engine](https://github.com/Memoguard8876/memoguard-engine) | Stellar XDR decoding, field extraction, scanning, redacted findings | v0.2.1 |
-| [memoguard-cli](https://github.com/Memoguard8876/memoguard-cli) | `memoguard scan` command, output formats, exit codes, release binaries | v0.2.2 |
+| [memoguard-cli](https://github.com/Memoguard8876/memoguard-cli) | `memoguard scan` command, output formats, exit codes, release binaries | v0.2.3 |
 | [memoguard-action](https://github.com/Memoguard8876/memoguard-action) | GitHub Action: pinned CLI, annotations, failure threshold | v0.2.1 |
 
 Full guides, the field-path reference and walkthroughs are in **[MemoGuard Docs](https://cjay-1.gitbook.io/memoguard-docs/)**. Product requirements and architecture are versioned in [memoguard-cli/product/docs](https://github.com/Memoguard8876/memoguard-cli/tree/main/product/docs).

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.3 — 2026-10-09
+
+- Pick up engine v0.2.2: `--simulation` accepts a full Stellar RPC JSON-RPC reply and exits 2 on unrecognized input instead of reporting clean.
+
 ## v0.2.2 — 2026-10-08
 
 - Make CI and release builds use the exact public module versions pinned in `go.mod`.
